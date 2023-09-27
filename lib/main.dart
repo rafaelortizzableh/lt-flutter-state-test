@@ -18,7 +18,7 @@ class _MyAppState extends State<MyApp> {
   static final _backgroundColor = Colors.teal[100];
   static const _title = 'States';
 
-  int _count = 0;
+  int _count = 28;
 
   @override
   Widget build(BuildContext context) {
