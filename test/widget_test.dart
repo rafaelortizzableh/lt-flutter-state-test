@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-
 import 'package:flutter_state_test/main.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets('Counter increments Number', (WidgetTester tester) async {
-    await tester.pumpWidget(MyApp());
+    await tester.pumpWidget(const MyApp());
 
     // Verify that our counter starts at 0.
     expect(find.text('28'), findsOneWidget);
