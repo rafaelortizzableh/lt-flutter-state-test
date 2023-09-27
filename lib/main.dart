@@ -10,13 +10,16 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  static final _backgroundColor = Colors.teal[100];
+  static const _title = 'States';
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.teal[100],
+        backgroundColor: _backgroundColor,
         appBar: AppBar(
-          title: const Text('States'),
+          title: const Text(_title),
         ),
         body: const Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
