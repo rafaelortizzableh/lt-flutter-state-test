@@ -1,25 +1,28 @@
 import 'package:flutter/material.dart';
+
 import 'widgets/button_first_level.dart';
 import 'widgets/counter_first_widget.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.teal[100],
         appBar: AppBar(
-          title: Text('States'),
+          title: const Text('States'),
         ),
-        body: Column(
+        body: const Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const ButtonFirstLevel(),
-            const CounterFirstWidget(),
+            ButtonFirstLevel(),
+            CounterFirstWidget(),
           ],
         ),
       ),
