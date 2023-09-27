@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'counter_consumer.dart';
+
 class CounterWidget extends StatelessWidget {
   const CounterWidget({super.key});
 
@@ -15,15 +17,19 @@ class CounterWidget extends StatelessWidget {
       padding: _externalPadding,
       child: ColoredBox(
         color: _backgroundColor,
-        child: const Center(
+        child: Center(
           child: Padding(
             padding: _internalPadding,
-            child: Text(
-              '28',
-              style: TextStyle(
-                fontSize: _fontSize,
-                color: _foregroundColor,
-              ),
+            child: CounterConsumer(
+              builder: (context, count, child) {
+                return Text(
+                  count.toString(),
+                  style: const TextStyle(
+                    fontSize: _fontSize,
+                    color: _foregroundColor,
+                  ),
+                );
+              },
             ),
           ),
         ),
