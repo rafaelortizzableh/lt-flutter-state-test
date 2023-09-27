@@ -7,11 +7,18 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   static final _backgroundColor = Colors.teal[100];
   static const _title = 'States';
+
+  int _count = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +28,24 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text(_title),
         ),
-        body: const Column(
+        body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            ButtonFirstLevel(),
-            CounterFirstWidget(),
+            ButtonFirstLevel(
+              onCountIncreased: _onCountIncreased,
+              count: _count,
+            ),
+            CounterFirstWidget(
+              count: _count,
+            ),
           ],
         ),
       ),
     );
+  }
+
+  void _onCountIncreased(int count) {
+    final newCount = count + 1;
+    setState(() => _count = newCount);
   }
 }

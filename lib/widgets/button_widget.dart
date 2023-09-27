@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
 class ButtonWidget extends StatelessWidget {
-  const ButtonWidget({super.key});
+  const ButtonWidget({
+    super.key,
+    required this.onCountIncreased,
+    required this.count,
+  });
+
+  final void Function(int currentCount) onCountIncreased;
+  final int count;
 
   static final _backgroundColor = Colors.blue[800];
   static const _externalPadding = EdgeInsets.all(30.0);
@@ -15,9 +22,7 @@ class ButtonWidget extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: _backgroundColor,
         ),
-        onPressed: () {
-          // TODO(rafaelortizzableh): Implement onPressed
-        },
+        onPressed: () => onCountIncreased(count),
         child: const Padding(
           padding: _internalPadding,
           child: Icon(Icons.plus_one),
