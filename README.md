@@ -17,38 +17,40 @@ Dependiendo del backend, se necesitarían otros paquetes como: [http](https://pu
 Para manejo de estados y dependencias, utilizaría [flutter_riverpod](https://pub.dev/packages/flutter_riverpod). Lo encuentro práctico, conveniente y potente. Aunque dependiendo de las necesidades, también se pueden utilizar soluciones como [bloc](https://pub.dev/packages/bloc) o [mobx](https://pub.dev/packages/mobx) estados y [get_it](https://pub.dev/packages/get_it) para inyección de dependencias. Para un proyecto nuevo, evitaría [provider](https://pub.dev/packages/provider), pues su autor paró su desarrollo y recomienda Riverpod en su lugar.
 
 Para la organización del código, utilizaría una estructura de carpetas como la siguiente:
+
 - core
-    - models
-    - services
-    - utils
-    - widgets
+  - models
+  - services
+  - utils
+  - widgets
 - features
-    - feature_1
-        - models/
-            - feature_1_model.dart
-        - service/
-            - feature_1_service.dart
-        - state/
-            - feature_1_controller.dart
-            - feature_1_state.dart
-        - feature_1_repository.dart
-        - ui/
-            - widgets/
-                - feature_1_widget.dart
-            - feature_1_screen.dart
-        - feature_1_subfeature_1
-            - service/
-            - etc...
-    - feature_2
-        - model/
-        - etc...
+  - feature_1
+    - models/
+      - feature_1_model.dart
+    - service/
+      - feature_1_service.dart
+    - state/
+      - feature_1_controller.dart
+      - feature_1_state.dart
+    - feature_1_repository.dart
+    - ui/
+      - widgets/
+        - feature_1_widget.dart
+      - feature_1_screen.dart
+    - feature_1_subfeature_1
+      - service/
+      - etc...
+  - feature_2
+    - model/
+    - etc...
 
 En cuanto a los principios SOLID:
 Procuraría crear convenciones para el desarrollo de nuevas funcionalidades, pues considero que, además de elegir una estructura de carpetas que lo facilite, es importante tenerlos presentes a la hora escribir código. Por lo mismo, considero que estas convenciones pueden ayudar a generar código de mayor calidad.
 
 Considero que mantener cada funcionalidad en su propia carpeta, con el código compartido en `core` es conveniente para el principio de responsabilidad única.
 
-Además, procuraría  aprovechar las funcionalidades de Dart en cuánto a la implementación y extensión de clases para cumplir con los principios de sustitución de Liskov, "open-close" y de segregación de interfaces. En cuanto a la dependencia de abstracciones, utilizaría interfaces para los servicios y repositorios, de forma que se puedan cambiar las implementaciones sin tener que cambiar el código que las usa.
+Además, procuraría aprovechar las funcionalidades de Dart en cuánto a la implementación y extensión de clases para cumplir con los principios de sustitución de Liskov, "open-close" y de segregación de interfaces. En cuanto a la dependencia de abstracciones, utilizaría interfaces para los servicios y repositorios, de forma que se puedan cambiar las implementaciones sin tener que cambiar el código que las usa.
+
 ## Ejercicio 2
 
 ### Pregunta
@@ -71,8 +73,10 @@ La solución consiste en arreglar el botón para que incremente el contador y ac
 
 Hay **dos** soluciones propuestas:
 
-- 1. [Rama `solution-1-set-state`](https://github.com/rafaelortizzableh/lt-flutter-state-test/tree/solution-1-set-state): La primera utiliza un widget Stateful para mantener el estado compartido y pasa a los widgets hijos el valor del contador y un callback para actualizar el estado. Como se solicita en las instrucciones del ejercicio, el único widget Stateful es el previamente mencionado.
-- 2. [Rama `solution-2-inherited-model`](https://github.com/rafaelortizzableh/lt-flutter-state-test/tree/solution-2-inherited-model): La segunda utiliza InheritedModel y ValueNotifier para mantener el estado compartido y notificar a los widgets hijos cuando cambia el estado. Hay un "wrapper widget" que crea el InheritedModel y elimina el ValueNotifier a través del método `dispose`, Al tratarse de una aplicación cuya única funcionalidad es ésta, esto no es estrictamente necesario, pero se implementa como medida preventiva para evitar "memory leaks". El "wrapper" encargado de dicho `dispose` es el único widget Stateful, como se solicita en las instrucciones del ejercicio.
+- 1. [Rama `solution-1-set-state`](https://github.com/rafaelortizzableh/lt-flutter-state-test/tree/solution-1-set-state): La primera utiliza un widget Stateful para mantener el estado compartido y pasa a los widgets hijos el valor del contador y un callback para actualizar el estado. Como se solicita en las instrucciones del ejercicio, el único widget Stateful es el previamente mencionado. Los cambios se pueden ver en esta PR:
+  - [PR #1 - setState](https://github.com/rafaelortizzableh/lt-flutter-state-test/pull/2/files)
+- 2. [Rama `solution-2-inherited-model`](https://github.com/rafaelortizzableh/lt-flutter-state-test/tree/solution-2-inherited-model): La segunda utiliza InheritedModel y ValueNotifier para mantener el estado compartido y notificar a los widgets hijos cuando cambia el estado. Hay un "wrapper widget" que crea el InheritedModel y elimina el ValueNotifier a través del método `dispose`, Al tratarse de una aplicación cuya única funcionalidad es ésta, esto no es estrictamente necesario, pero se implementa como medida preventiva para evitar "memory leaks". El "wrapper" encargado de dicho `dispose` es el único widget Stateful, como se solicita en las instrucciones del ejercicio. Los cambios se pueden ver en esta PR:
+  - [PR #2 - InheritedModel](https://github.com/rafaelortizzableh/lt-flutter-state-test/pull/1/files)
 
 Ambas soluciones deberían pasar el `widget_test.dart` de la carpeta `test`.
 
@@ -82,20 +86,23 @@ Ambas soluciones deberían pasar el `widget_test.dart` de la carpeta `test`.
 - Hacer checkout en la rama con la solución que desea ejecutar
 - Ejecutar `flutter run` en la raíz del proyecto
 
-
 # Ejericio 3
 
 ### Pregunta
+
 > Considera una matriz de letras como la de la imágen (de tamaño variable), y una lista de palabras (de tamaño variable también). Se pide diseñar un algoritmo que devuelva una lista de palabras que se formar con las letras del tablero, teniendo en cuenta la siguiente restricción:
-    >- Las letras de las palabras deben formar una cadena cada letra debe estar adyacente - ortogonal o diagonalmente - con la siguiente.
-    >- Cada letra sólo se puede recorrer una vez por palabra.
+>
+> - Las letras de las palabras deben formar una cadena cada letra debe estar adyacente - ortogonal o diagonalmente - con la siguiente.
+> - Cada letra sólo se puede recorrer una vez por palabra.
 
 > Se debe entregar una función en Dart/Swift/Kotlin que siga una cabecera similar a la siguiente (ejemplo en Dart):
+
 ```dart
-List​<​String​> findWords(​List​<​List​<​String​>> matrix, ​List​<​String​> words); 
+List​<​String​> findWords(​List​<​List​<​String​>> matrix, ​List​<​String​> words);
 ```
+
 > Parámetros de ejemplo:
- 
+
 ```dart
 List​<​List​<​String​>> matrix = [
     [​'a'​, ​'e'​, ​'t'​, ​'l'​],
@@ -104,17 +111,20 @@ List​<​List​<​String​>> matrix = [
     [​'c'​, ​'h'​, ​'x'​, ​'g'​],
 ];
 ```
+
 ```dart
 List​<​String​> words = [ ​'leadtech'​, ​'notleadtech'​, ​'potato'​, ​'anotherCompany'​,
 ];​'great'​,
 ```
 
 > Output:
-```dart 
+
+```dart
 [​'leadtech'​, ​'great'​]
 ```
 
 ### Respuesta
+
 ```dart
 List<String> findWords(List<List<String>> matrix, List<String> words) {
   const cellMoves = [
@@ -289,6 +299,7 @@ bool _shouldSearchNeighborCell({
 ```
 
 ### Comentarios
+
 - Se utiliza una implementación de DFS (depth-first search) para buscar las palabras en la matriz.
 - Se utiliza una matriz de visitados para evitar recorrer una misma celda más de una vez por palabra.
 - Se utiliza una matriz de movimientos para recorrer las celdas adyacentes a la celda actual.
