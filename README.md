@@ -71,8 +71,8 @@ La solución consiste en arreglar el botón para que incremente el contador y ac
 
 Hay **dos** soluciones propuestas:
 
-- 1. Rama `solution-1-set-state`: La primera utiliza un widget Stateful para mantener el estado compartido y pasa a los widgets hijos el valor del contador y un callback para actualizar el estado. Como se solicita en las instrucciones del ejercicio, el único widget Stateful es el previamente mencionado.
-- 2. Rama `solution-2-inherited-model`: La segunda utiliza InheritedModel y ValueNotifier para mantener el estado compartido y notificar a los widgets hijos cuando cambia el estado. Hay un "wrapper widget" que crea el InheritedModel y elimina el ValueNotifier a través del método `dispose`, Al tratarse de una aplicación cuya única funcionalidad es ésta, esto no es estrictamente necesario, pero se implementa como medida preventiva para evitar "memory leaks". El "wrapper" encargado de dicho `dispose` es el único widget Stateful, como se solicita en las instrucciones del ejercicio.
+- 1. [Rama `solution-1-set-state`](https://github.com/rafaelortizzableh/lt-flutter-state-test/tree/solution-1-set-state): La primera utiliza un widget Stateful para mantener el estado compartido y pasa a los widgets hijos el valor del contador y un callback para actualizar el estado. Como se solicita en las instrucciones del ejercicio, el único widget Stateful es el previamente mencionado.
+- 2. [Rama `solution-2-inherited-model`](https://github.com/rafaelortizzableh/lt-flutter-state-test/tree/solution-2-inherited-model): La segunda utiliza InheritedModel y ValueNotifier para mantener el estado compartido y notificar a los widgets hijos cuando cambia el estado. Hay un "wrapper widget" que crea el InheritedModel y elimina el ValueNotifier a través del método `dispose`, Al tratarse de una aplicación cuya única funcionalidad es ésta, esto no es estrictamente necesario, pero se implementa como medida preventiva para evitar "memory leaks". El "wrapper" encargado de dicho `dispose` es el único widget Stateful, como se solicita en las instrucciones del ejercicio.
 
 Ambas soluciones deberían pasar el `widget_test.dart` de la carpeta `test`.
 
