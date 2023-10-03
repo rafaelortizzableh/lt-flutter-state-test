@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'widgets/button_first_level.dart';
-import 'widgets/counter_first_widget.dart';
+import 'widgets/counter_state_wrapper.dart';
+import 'widgets/home_screen_body.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,13 +21,7 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text(_title),
         ),
-        body: const Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            ButtonFirstLevel(),
-            CounterFirstWidget(),
-          ],
-        ),
+        body: const CounterStateWrapper(child: HomeScreenBody()),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_state_test/state/counter_inherited_model.dart';
 
 class ButtonWidget extends StatelessWidget {
   const ButtonWidget({super.key});
@@ -15,9 +16,7 @@ class ButtonWidget extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: _backgroundColor,
         ),
-        onPressed: () {
-          // TODO(rafaelortizzableh): Implement onPressed
-        },
+        onPressed: CounterInheritedModel.of(context).increment,
         child: const Padding(
           padding: _internalPadding,
           child: Icon(Icons.plus_one),
